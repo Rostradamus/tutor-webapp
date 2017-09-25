@@ -6,23 +6,25 @@
     </div>
     
     <div class = "postedit_body">
-	    <form method="POST" class="post-form">
-
+	    <form method="POST" class="post-form" id="post-form">
+            {% csrf_token %}
             <div class="newPostDetail">
-                {% csrf_token %}
                 {# Form created through python. Contains details about tutoring course details #}
                 {{ form.as_p }}
-{#                <button class="save btn btn-default" id="newPostNext">Next</button>#}
+                {# <button class="save btn btn-default" id="newPostNext">Next</button>#}
             </div>
-            <button class="save btn btn-default" id="newPostSave">Save</button>
-	    </form>
-
-            {#DOM for users to choose dates#}
 
             <div id = "Availability">
             <h4> Availability: </h4>
                 <button class="add_tutor_time">Add Time</button>
             </div>
+            <br>
+            <input type="submit" value="Save" class="save btn btn-default" id="newPostSave">
+	    </form>
+
+            {#DOM for users to choose dates#}
+
+
 
 
 {#            <div class = "checkbox">#}

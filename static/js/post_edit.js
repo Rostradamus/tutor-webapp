@@ -66,11 +66,11 @@ $(document).ready(function(){
       var startTimeId = "time_start_" + numOfTimeObjects;
       var endTimeId = "time_end_" + numOfTimeObjects;
       var daysofweekClass = "daysofweek" + numOfTimeObjects;
-      $("#Availability").append("<div class='" + domClass + "'>" +
+      $("#Availability").append("<br><div class='" + domClass + "'>" +
                         "<label><input type='text' value='Day of Week' class='"+daysofweekClass+"'></label>" +
                         "<input class='timepicker text-center'  jt-timepicker='' time='model.time' time-string='model.timeString' default-time='model.options.defaultTime' time-format='model.options.timeFormat' start-time='model.options.startTime' min-time='model.options.minTime' max-time='model.options.maxTime' interval='model.options.interval' dynamic='model.options.dynamic' scrollbar='model.options.scrollbar' dropdown='model.options.dropdown' placeholder='start time' id = '"+startTimeId+"'>" +
                         "<input class='timepicker text-center' jt-timepicker='' time='model.time' time-string='model.timeString' default-time='model.options.defaultTime' time-format='model.options.timeFormat' start-time='model.options.startTime' min-time='model.options.minTime' max-time='model.options.maxTime' interval='model.options.interval' dynamic='model.options.dynamic' scrollbar='model.options.scrollbar' dropdown='model.options.dropdown' placeholder='end time' id = '"+endTimeId+"'>" +
-                        "<button class='tutor_time_save'>Save</button>"+
+                        "<input value='Save' class='tutor_time_save save btn btn-default'>"+
                         "<button class='tutor_time_edit'>Edit</button>"+
                         "<button class='tutor_time_delete'>Delete</button>"+
                         "<div><br>");
@@ -100,7 +100,7 @@ $(document).ready(function(){
           if (validateTime(timeToInt(startTime), timeToInt(endTime))) {
               var timeObject = {"startTime": startTime,
                                 "endTime": endTime,
-                                "dayOfWeek": dayOfWeek}
+                                "dayOfWeek": dayOfWeek};
               tutorAvailableTime.push(timeObject);
             // console.log("hello " +  parentDivClass + " start time is " + startTime + " end time is " + endTime);
               console.log(tutorAvailableTime);
@@ -108,10 +108,30 @@ $(document).ready(function(){
               console.log("Time Validation has failed");
           }
       });
+
+      $('#post-form').on('submit', function(event) {
+          event.preventDefault();
+          $.ajax({
+                url : "/post/new/", // the endpoint
+                type : "POST", // http method
+                data : {
+                    "tutor_time": tutorAvailableTime,
+                    "post_data": $(this).serialize(),
+                }, // data sent with the post request
+
+                // handle a successful response
+                success : function(json) {
+                    console.log("YAaaaaaAAAaaaaaa!");
+                },
+
+                // handle a non-successful response
+                error : function(xhr,errmsg,err) {
+                    console.log("shit...");
+                    // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+      });
+
   });
-
-
-
-
 });
 
