@@ -1,7 +1,16 @@
 $(document).ready(function(){
     var tutorAvailableTime = [];
     var numOfTimeObjects = 0;
+    var isTimeSubmit = false;
+    var isFormSubmit = false;
     // $('.postedit_time').hide();
+    $('.tutor_time_save').on('click', function() {
+        isTimeSubmit = true;
+    });
+
+    $('#newPostSave').on('click', function() {
+        isFormSubmit = true;
+    });
 
   function convertTimeFormat(str) {
         var time = str;
@@ -111,17 +120,27 @@ $(document).ready(function(){
 
       $('#post-form').on('submit', function(event) {
           event.preventDefault();
+
+          if (!isTimeSubmit && isFormSubmit) {
+              createPost();
+          }
+
+      });
+
+      function createPost() {
+          var form = $('#post-form');
           $.ajax({
                 url : "/post/new/", // the endpoint
                 type : "POST", // http method
                 data : {
-                    "tutor_time": tutorAvailableTime,
-                    "post_data": $(this).serialize(),
+                    "tutor_time[]": tutorAvailableTime,
+                    "post_data": form.serialize()
                 }, // data sent with the post request
 
                 // handle a successful response
                 success : function(json) {
-                    console.log("YAaaaaaAAAaaaaaa!");
+                    console.log("success");
+                    //console.log(json);
                 },
 
                 // handle a non-successful response
@@ -129,8 +148,8 @@ $(document).ready(function(){
                     console.log("shit...");
                     // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
                 }
-            });
-      });
+          });
+      }
 
   });
 });
