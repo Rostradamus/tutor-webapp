@@ -10,7 +10,6 @@ from log.models import UserProfile
 class Post(models.Model):
 
     userpk = models.IntegerField(default=-1)
-
     course_name = models.CharField(max_length=50, choices=COURSE_CHOICES)
     course_number = models.IntegerField()
     start_at = models.DateTimeField(default=timezone.now)

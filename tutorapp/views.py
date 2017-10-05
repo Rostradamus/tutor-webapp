@@ -3,6 +3,8 @@ from .models import Post
 from .forms import PostForm, SearchForm
 from log.models import UserProfile
 from django.http import Http404
+from timepost.forms import TimepostForm
+from timepost.views import timepost_create
 from urllib.parse import urlparse
 
 
@@ -57,13 +59,21 @@ def post_new(request):
                 post = form.save(commit=False)
                 post.userpk = request.user.pk
                 post.save()
-                return redirect('post_detail', pk=post.pk)
+                # return redirect('post_detail', pk=post.pk)
+                author = get_object_or_404(UserProfile, pk=post.userpk)
+                form = TimepostForm(request.POST, instance=post)
+                return render(request, 'post_add_time.html', {'post': post, 'author': author, 'form': form})
         else:
             form = PostForm()
     else:
         posts = Post.objects.all()
         return render(request, 'post_list3.html', {'posts': posts})
-    return render(request, 'post_edit.html', {'form': form})
+    if request.method == "POST":
+        tutor_pk = request.POST.get("tutor_pk", None)
+        return timepost_create(request, tutor_pk)
+        # return redirect('/')
+    else :
+        return render(request, 'post_edit.html', {'form': form})
 
 
 def post_edit(request, pk):
@@ -80,6 +90,17 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'post_edit.html', {'form': form})
 
+
+def post_add_time(request, pk):
+    if request.user.pk is None:
+        posts = Post.objects.all()
+        return render(request, 'post_list3.html')
+    else:
+        post = get_object_or_404(Post, pk=pk)
+        if post.userpk == -1:
+            return redirect('/')
+        author = get_object_or_404(UserProfile, pk=post.userpk)
+        return render(request, 'post_add_time.html', {'post': post, 'author': author})
 
 def my_post(request):
     pairs = []

@@ -7,6 +7,7 @@ from django.contrib import admin
 from django.contrib.auth import views
 from log.forms import UserLoginForm
 from log.views import (login_view, register_view, logout_view, update_view)
+from timepost.views import (timepost_create)
 from . import views
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^post/(?P<pk>\d+)/delete/prev=(?P<prev>.+)/$', views.post_delete, name='post_delete'),
     url(r'^search/$', views.post_search, name='post_search'),
+    url(r'^timepost_create/(?P<pk>\d+)/', timepost_create, name='timepost_create'),
     url(r'^\?q=(?P<query_search>\w+)$', views.search_result, name='search_result'),
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),

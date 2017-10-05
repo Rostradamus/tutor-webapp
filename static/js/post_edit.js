@@ -82,7 +82,7 @@ $(document).ready(function(){
           startTime: '8:00am',
           dynamic: true,
           dropdown: true,
-          scrollbar: true,
+          scrollbar: true
       });
 
       //made it for now
