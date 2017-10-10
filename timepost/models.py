@@ -6,10 +6,7 @@ from .daysOfWeek import DAYS_OF_WEEK
 
 
 class Timepost(models.Model):
-    student_username = models.CharField(max_length=100)
     tutor_pk = models.CharField(max_length=100)
-    course_name = models.CharField(max_length=50)
-    course_number = models.IntegerField()
     days = models.CharField(max_length = 10,choices = DAYS_OF_WEEK)
     start_time = models.TimeField(blank=False, null = False)
     end_time = models.TimeField(blank=False, null = False)

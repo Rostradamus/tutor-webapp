@@ -17,10 +17,7 @@ class Migration(migrations.Migration):
             name='Timepost',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('student_username', models.CharField(max_length=100)),
                 ('tutor_pk', models.CharField(max_length=100)),
-                ('course_name', models.CharField(default='', max_length=50)),
-                ('course_number', models.IntegerField()),
                 ('days', models.CharField(max_length=10)),
                 ('start_time', models.TimeField()),
                 ('end_time', models.TimeField()),

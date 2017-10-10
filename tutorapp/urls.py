@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/delete/prev=(?P<prev>.+)/$', views.post_delete, name='post_delete'),
     url(r'^search/$', views.post_search, name='post_search'),
     url(r'^timepost_create/(?P<pk>\d+)/', timepost_create, name='timepost_create'),
+    url(r'^post_detail_time/(?P<pk>\d+)/', views.post_detail_time, name='post_detail_time'),
     url(r'^\?q=(?P<query_search>\w+)$', views.search_result, name='search_result'),
     # url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),

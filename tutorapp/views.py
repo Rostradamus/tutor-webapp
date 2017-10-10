@@ -5,6 +5,7 @@ from log.models import UserProfile
 from django.http import Http404
 from timepost.forms import TimepostForm
 from timepost.views import timepost_create
+from timepost.models import Timepost
 from urllib.parse import urlparse
 
 
@@ -33,8 +34,6 @@ def update(request):
 
 def post_detail(request, pk):
     # TODO: post_list3.html should be resolved
-
-    request
     temp = urlparse(request.META.get('HTTP_REFERER'))
 
     if request.user.pk is None:
@@ -49,6 +48,17 @@ def post_detail(request, pk):
 
         return render(request, 'post_detail.html', {'post': post, 'author': author})
 
+
+def post_detail_time(request, time_post):
+    if time_post is not None:
+        post = get_object_or_404(Post, pk = time_post.tutor_pk)
+        author = get_object_or_404(UserProfile, pk=post.userpk)
+        time_posts = Timepost.objects.filter(tutor_pk= post.pk)
+
+        return render(request, 'post_detail_time.html', {'post': post, 'author': author, 'timeposts':time_posts})
+    else:
+        referer = request.META.get('HTTP_REFERER', '')
+        return redirect(referer)
 
 # TODO: posting should be valid only when user is logged in
 def post_new(request):
@@ -68,10 +78,9 @@ def post_new(request):
     else:
         posts = Post.objects.all()
         return render(request, 'post_list3.html', {'posts': posts})
+
     if request.method == "POST":
-        tutor_pk = request.POST.get("tutor_pk", None)
-        return timepost_create(request, tutor_pk)
-        # return redirect('/')
+        return timepost_create(request)
     else :
         return render(request, 'post_edit.html', {'form': form})
 
