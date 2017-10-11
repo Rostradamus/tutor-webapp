@@ -29,7 +29,7 @@ def update(request):
 #     return render(request, 'post_list.html', {'posts': pairs})
 
 
-def post_detail(request, pk, posts):
+def post_detail(request, pk):
     # TODO: post_list3.html should be resolved
 
     request

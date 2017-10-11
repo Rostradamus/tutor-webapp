@@ -2,7 +2,7 @@
  * Created by rolee on 2017-10-10.
  */
 var created_date, course, username, year, name;
-$(document).ready(function() {
+$(document).ready(function () {
     created_date = false;
     course = false;
     username = false;
@@ -72,9 +72,15 @@ function sortTable(cIndex) {
 }
 
 //TODO: working on dynamic login popup
-function popLogin() {
-    var target = document.getElementById("myModalLogin");
-    target.style.visibility = "visible";
-    // target.append("<div id='myModalLogin' class='modal fade' role='dialog'></div>");
 
-}
+
+// Plugin options and our code
+
+
+$(function () {
+    $(".modal_trigger").leanModal({
+        top: 100,
+        overlay: 0.6,
+        closeButton: ".modal_close"
+    });
+});
