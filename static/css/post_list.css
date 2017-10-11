@@ -38,6 +38,10 @@ table #post_table{
 	color: coral;
 }
 
+/*#myModalLogin{*/
+	/*visibility: hidden;*/
+/*}*/
+
 .modal-login{
 	display:inline-flex;
 }
