@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {% if message %}
         <div class=""><p>{{ message }}</p></div>
     {% endif %}
@@ -8,11 +9,11 @@
         <table class="table table-hover"  id= "post_table">
             <thead>
             <tr>
-                <th id="cdate">Created Date</th>
-                <th id="course">Course</th>
-                <th>User Name</th>
-                <th id="year">Year</th>
-                <th id="name">Name</th>
+                <th><span id="cdate" onclick="sortTable(0)"> Created Date </span></th>
+                <th><span id="course" onclick="sortTable(1)">Course</span></th>
+                <th><span id="username" onclick="sortTable(2)">User Name</span></th>
+                <th><span id="year" onclick="sortTable(3)">Year</span></th>
+                <th><span id="name" onclick="sortTable(4)">Name</span></th>
                 <th>Details</th>
             </tr>
             </thead>
