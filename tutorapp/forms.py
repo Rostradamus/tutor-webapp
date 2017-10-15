@@ -3,6 +3,7 @@ from .course_list import COURSE_CHOICES
 from .models import Post
 
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
@@ -20,4 +21,5 @@ class SearchForm(forms.Form):
 
     course_name = forms.ChoiceField(required=False, choices=(('', '-----'),) + COURSE_CHOICES)
     course_number = forms.IntegerField(required=False)
-    created_date_order = forms.ChoiceField(required=False, widget=forms.RadioSelect, choices=CREATED_ORDER_CHOICE, )
+    created_date_order = forms.ChoiceField(required=False, widget=forms.RadioSelect, choices=CREATED_ORDER_CHOICE)
+    major = forms.ChoiceField(required=False, choices=(('', '-----'),) + COURSE_CHOICES)

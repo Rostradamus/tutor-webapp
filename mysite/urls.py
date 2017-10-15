@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('tutorapp.urls')),
     url(r'', include('timepost.urls')),
+    url(r'', include('log.urls')),
 ]
