@@ -19,7 +19,7 @@ from log.models import UserProfile
 def login_view(request):
     if request.user.pk:
         return redirect('/')
-    print(request.user.is_authenticated())
+    # print(request.user.is_authenticated())
     title = "Login"
     form = UserLoginForm(request.POST or None)
     if form.is_valid():
@@ -36,7 +36,7 @@ def register_view(request):
     if request.user.pk:
         return redirect('/')
     else:
-        print(request.user.is_authenticated())
+        # print(request.user.is_authenticated())
         title = "Register"
         user_form = UserRegisterForm(request.POST or None)
         profile_form = ProfileRegistrationFrom(request.POST or None)
